@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PregameSettings" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Game" />
+        <activity android:name=".score" />
+        <activity android:name=".LeaderBoard"></activity>
     </application>
 
 </manifest>
