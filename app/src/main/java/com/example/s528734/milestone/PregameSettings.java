@@ -37,9 +37,7 @@ public class PregameSettings extends AppCompatActivity {
         Intent letsgo = new Intent(this, Game.class);
         startActivity(letsgo);
 
-        Intent intent = new Intent(this, Game.class);
-        intent.putExtra("picture", byteArray);
-        startActivity(intent);
+
     }
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -59,6 +57,7 @@ public class PregameSettings extends AppCompatActivity {
 
     }
 
+    Bitmap bmp = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -77,7 +76,7 @@ public class PregameSettings extends AppCompatActivity {
 
             //ImageView imageView = (ImageView) findViewById(R.id.imgView);
 
-            Bitmap bmp = null;
+
             try {
                 bmp = getBitmapFromUri(selectedImage);
             } catch (IOException e) {
@@ -86,12 +85,19 @@ public class PregameSettings extends AppCompatActivity {
             }
             //imageView.setImageBitmap(bmp);
 
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+
+
+            Intent mIntent = new Intent(this, Game.class);
+            mIntent.putExtra("bmp_img", b);
+            startActivity(mIntent);
+
         }
 
 
     }
-
-
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
