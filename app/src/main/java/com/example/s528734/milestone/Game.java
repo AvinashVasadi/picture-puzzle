@@ -50,6 +50,7 @@ public class Game extends AppCompatActivity {
         canvas.drawBitmap(bmp, 0, 0, null);
         //canvas.drawRect(0, 0, 100, 100, paint);
 
+
         Bitmap[] imgs = new Bitmap[9];
 //        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, bmOverlay.getWidth()/2 , bmOverlay.getHeight()/2);
 //        imgs[1] = Bitmap.createBitmap(bmOverlay, bmOverlay.getWidth()/2, 0, bmOverlay.getWidth()/2, bmOverlay.getHeight()/2);
@@ -90,6 +91,23 @@ public class Game extends AppCompatActivity {
 //        ImageView iv = (ImageView)findViewById(R.id.imageView);
 //        Bitmap result = splitImage(bmOverlay, 50);
 //        iv.setImageBitmap(result);
+
+//        Bitmap[] imgs = new Bitmap[9];
+//        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 80 , 80);
+//        imgs[1] = Bitmap.createBitmap(bmOverlay, 80, 0, 80, 80);
+//        imgs[2] = Bitmap.createBitmap(bmOverlay,160, 0, 80,80);
+//        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 80, 80, 80);
+//        imgs[4] = Bitmap.createBitmap(bmOverlay, 80, 80, 80,80);
+//        imgs[5] = Bitmap.createBitmap(bmOverlay, 160, 80,80,80);
+//        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 160, 80,80);
+//        imgs[7] = Bitmap.createBitmap(bmOverlay, 80, 160,80,80);
+//        imgs[8] = Bitmap.createBitmap(bmOverlay, 160,160,80,80);
+//
+
+//        ImageView iv = (ImageView)findViewById(R.id.imageView);
+//        Bitmap result = splitImage(bmOverlay, 50);
+//        iv.setImageBitmap(result);
+
 
         //Bitmap mBitmap = (Bitmap) getIntent().getParcelableExtra("bmp_img");
 
