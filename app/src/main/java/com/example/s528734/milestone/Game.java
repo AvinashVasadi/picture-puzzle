@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class Game extends AppCompatActivity {
         canvas.drawBitmap(bmp, 0, 0, null);
         //canvas.drawRect(0, 0, 100, 100, paint);
 
+
         Bitmap[] imgs = new Bitmap[9];
 //        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, bmOverlay.getWidth()/2 , bmOverlay.getHeight()/2);
 //        imgs[1] = Bitmap.createBitmap(bmOverlay, bmOverlay.getWidth()/2, 0, bmOverlay.getWidth()/2, bmOverlay.getHeight()/2);
@@ -71,36 +73,93 @@ public class Game extends AppCompatActivity {
         final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this, imgs));
 
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageView tile1 = (ImageView) gridview.getChildAt(0);
+                ImageView capture1 = (ImageView) tile1;
+                capture1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-1", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile2 = (ImageView) gridview.getChildAt(1);
+                ImageView capture2 = (ImageView) tile2;
+                capture2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-2", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile3 = (ImageView) gridview.getChildAt(2);
+                ImageView capture3 = (ImageView) tile3;
+                capture3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-3", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile4 = (ImageView) gridview.getChildAt(3);
+                ImageView capture4 = (ImageView) tile4;
+                capture4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-4", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile5 = (ImageView) gridview.getChildAt(4);
+                ImageView capture5 = (ImageView) tile5;
+                capture5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-5", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile6 = (ImageView) gridview.getChildAt(5);
+                ImageView capture6 = (ImageView) tile6;
+                capture6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-6", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile7 = (ImageView) gridview.getChildAt(6);
+                ImageView capture7 = (ImageView) tile7;
+                capture7.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-7", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile8 = (ImageView) gridview.getChildAt(7);
+                ImageView capture8 = (ImageView) tile8;
+                capture8.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-8", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                ImageView tile9 = (ImageView) gridview.getChildAt(8);
+                ImageView capture9 = (ImageView) tile9;
+                capture9.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Accessed Tile-9", Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
-        //ImageAdapter ia = (ImageAdapter)gridview.getAdapter();
-//gridview.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
-//    }
-//});
-        ViewGroup gridchild = (ViewGroup) gridview.getChildAt(0);
-//        gridchild.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        ImageView iv = (ImageView)findViewById(R.id.imageView);
-//        Bitmap result = splitImage(bmOverlay, 50);
-//        iv.setImageBitmap(result);
-
-        //Bitmap mBitmap = (Bitmap) getIntent().getParcelableExtra("bmp_img");
-
-
-//        Bundle extras = getIntent().getExtras();
-//        byte[] byteArray = extras.getByteArray("picture");
-//
-//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-//        ImageView image = (ImageView) findViewById(R.id.imageView);
-//
-//        image.setImageBitmap(bmp);
+            }
+        });
     }
     public void click(View v){
         Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
