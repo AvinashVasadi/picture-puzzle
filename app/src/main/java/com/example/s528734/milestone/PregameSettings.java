@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -36,8 +38,6 @@ public class PregameSettings extends AppCompatActivity {
     public void OnLetsGo(View v){
         Intent letsgo = new Intent(this, Game.class);
         startActivity(letsgo);
-
-
     }
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -49,12 +49,6 @@ public class PregameSettings extends AppCompatActivity {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
-//        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        byteArray = stream.toByteArray();
-
-
     }
 
     Bitmap bmp = null;
@@ -74,29 +68,37 @@ public class PregameSettings extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            //ImageView imageView = (ImageView) findViewById(R.id.imgView);
-
-
             try {
                 bmp = getBitmapFromUri(selectedImage);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            //imageView.setImageBitmap(bmp);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] b = baos.toByteArray();
 
-
             Intent mIntent = new Intent(this, Game.class);
             mIntent.putExtra("bmp_img", b);
-            startActivity(mIntent);
+
+            Intent gameMedium = new Intent(this, GameMedium.class);
+            gameMedium.putExtra("bmp_img",b);
+
+            Intent gameHard = new Intent(this, GameHard.class);
+            gameHard.putExtra("bmp_img",b);
+
+            if(modeFlag == 0 || levelFlag == 0){
+                Toast.makeText(getApplicationContext(), "Select the both MODE & LEVEL of the game", Toast.LENGTH_LONG).show();
+            } else if(easy == 1){
+                startActivity(mIntent);
+            } else if(medium == 1){
+                startActivity(gameMedium);
+            } else if(hard == 1){
+                startActivity(gameHard);
+            }
 
         }
-
-
     }
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
@@ -106,5 +108,53 @@ public class PregameSettings extends AppCompatActivity {
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
+    }
+
+    public int modeFlag = 0;
+
+    public void modeOnRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        modeFlag = 0;
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.TimeMode:
+                if (checked)
+                    modeFlag = 1;
+                    break;
+            case R.id.NormalMode:
+                if (checked)
+                    modeFlag = 1;
+                    break;
+        }
+    }
+
+    public int levelFlag = 0;
+    public int easy = 0;
+    public int medium = 0;
+    public int hard = 0;
+
+    public void levelOnRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        levelFlag = 0;
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.Easy:
+                if (checked)
+                    levelFlag = 1;
+                    easy = 1;
+                break;
+            case R.id.Medium:
+                if (checked)
+                    levelFlag = 1;
+                    medium = 1;
+                break;
+            case R.id.Hard:
+                if (checked)
+                    levelFlag = 1;
+                    hard = 1;
+                break;
+        }
     }
 }

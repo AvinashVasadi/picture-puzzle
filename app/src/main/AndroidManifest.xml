@@ -20,7 +20,9 @@
         <activity android:name=".Settings" />
         <activity android:name=".Game" />
         <activity android:name=".score" />
-        <activity android:name=".LeaderBoard"></activity>
+        <activity android:name=".LeaderBoard" />
+        <activity android:name=".GameMedium" />
+        <activity android:name=".GameHard"></activity>
     </application>
 
 </manifest>

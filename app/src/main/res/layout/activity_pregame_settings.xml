@@ -147,7 +147,7 @@
         app:layout_constraintVertical_bias="0.096">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/TimeMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -156,6 +156,7 @@
             android:layout_marginTop="8dp"
             android:text="Time mode"
             android:textSize="18sp"
+            android:onClick="modeOnRadioButtonClicked"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.814"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -164,7 +165,7 @@
             app:layout_constraintVertical_bias="0.112" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/NormalMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -172,6 +173,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="Normal mode"
+            android:onClick="modeOnRadioButtonClicked"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.106"
@@ -184,6 +186,7 @@
     </RadioGroup>
 
     <RadioGroup
+        android:id="@+id/radioGroupLevel"
         android:layout_width="311dp"
         android:layout_height="59dp"
         android:layout_marginBottom="8dp"
@@ -200,7 +203,7 @@
         app:layout_constraintVertical_bias="0.401">
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/Hard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -208,6 +211,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="Hard"
+            android:onClick="levelOnRadioButtonClicked"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.835"
@@ -217,7 +221,7 @@
             app:layout_constraintVertical_bias="0.403" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/Medium"
             android:layout_width="97dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -226,6 +230,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="0.06"
             android:text="Medium"
+            android:onClick="levelOnRadioButtonClicked"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.464"
@@ -235,7 +240,7 @@
             app:layout_constraintVertical_bias="0.402" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/Easy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -243,6 +248,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="Easy"
+            android:onClick="levelOnRadioButtonClicked"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.085"
