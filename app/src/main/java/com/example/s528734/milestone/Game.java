@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -14,6 +15,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,31 +43,37 @@ public class Game extends AppCompatActivity {
 
       Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
 
-        Bitmap bmOverlay = Bitmap.createBitmap(315, 315, Bitmap.Config.ARGB_8888);
+        int xcordinateindex = (bmp.getWidth()-300)/2;
+        int ycordinateindex = (bmp.getHeight()-300)/2;
 
-        Paint paint = new Paint();
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordinateindex,ycordinateindex, 300, 300);
 
-
-        Canvas canvas = new Canvas(bmOverlay);
-        canvas.drawBitmap(bmp, 0, 0, null);
-        //canvas.drawRect(0, 0, 100, 100, paint);
-
+        Log.d(String.valueOf("width value : " + bmOverlay.getWidth() + "height value : " + bmOverlay.getHeight()), "Width before creating bmp");
+//        Bitmap bmOverlay = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888);
+//
+//        Paint paint = new Paint();
+//        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+//
+//
+//        Canvas canvas = new Canvas(bmOverlay);
+//        canvas.drawBitmap(bmp, 0, 0, null);
+//        //canvas.drawRect(0, 0, 100, 100, paint);
+//        Log.d("Width value : "+String.valueOf(bmOverlay.getWidth()), "width");
 
         Bitmap[] imgs = new Bitmap[9];
 //        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, bmOverlay.getWidth()/2 , bmOverlay.getHeight()/2);
 //        imgs[1] = Bitmap.createBitmap(bmOverlay, bmOverlay.getWidth()/2, 0, bmOverlay.getWidth()/2, bmOverlay.getHeight()/2);
 //        imgs[2] = Bitmap.createBitmap(bmOverlay,0, bmOverlay.getHeight()/2, bmOverlay.getWidth()/2,bmOverlay.getHeight()/2);
 //        imgs[3] = Bitmap.createBitmap(bmOverlay, bmOverlay.getWidth()/2, bmOverlay.getHeight()/2, bmOverlay.getWidth()/2, bmOverlay.getHeight()/2);
-        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 80 , 80);
-        imgs[1] = Bitmap.createBitmap(bmOverlay, 80, 0, 80, 80);
-        imgs[2] = Bitmap.createBitmap(bmOverlay,160, 0, 80,80);
-        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 80, 80, 80);
-        imgs[4] = Bitmap.createBitmap(bmOverlay, 80, 80, 80,80);
-        imgs[5] = Bitmap.createBitmap(bmOverlay, 160, 80,80,80);
-        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 160, 80,80);
-        imgs[7] = Bitmap.createBitmap(bmOverlay, 80, 160,80,80);
-        imgs[8] = Bitmap.createBitmap(bmOverlay, 160,160,80,80);
+        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
+        imgs[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
+        imgs[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
+        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
+        imgs[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
+        imgs[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
+        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
+        imgs[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
+        imgs[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
 
 
         Collections.shuffle((Arrays.asList(imgs)));
