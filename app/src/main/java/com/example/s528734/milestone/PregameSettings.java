@@ -9,11 +9,13 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -67,6 +69,11 @@ public class PregameSettings extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
+
+            String imagename = picturePath.substring(picturePath.lastIndexOf('/')+1, picturePath.length());
+
+            TextView tv = (TextView)findViewById(R.id.imageName);
+            tv.setText(imagename);
 
             try {
                 bmp = getBitmapFromUri(selectedImage);

@@ -128,11 +128,11 @@
 
     <GridView
         android:id="@+id/gridviewMedium"
-        android:layout_width="315dp"
-        android:layout_height="315dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:numColumns="4"
         app:layout_constraintBottom_toBottomOf="parent"

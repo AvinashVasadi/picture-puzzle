@@ -33,10 +33,10 @@ import java.util.Collections;
 
 public class GameMedium extends AppCompatActivity {
 
-    Bitmap[] imgs = new Bitmap[9];
-    Bitmap[] refimgs = new Bitmap[9];
-    int position1 = 10;
-    int position2 = 10;
+    Bitmap[] imgs = new Bitmap[16];
+    Bitmap[] refimgs = new Bitmap[16];
+    int position1 = 20;
+    int position2 = 20;
     int position1ref = 0;
     int position2ref = 1;
     int numberOfMoves = 0;
@@ -56,15 +56,22 @@ public class GameMedium extends AppCompatActivity {
 
         Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordinateindex,ycordinateindex, 300, 300);
 
-        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
-        imgs[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
-        imgs[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
-        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
-        imgs[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
-        imgs[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
-        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
-        imgs[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
-        imgs[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
+        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 75,  75);
+        imgs[1] = Bitmap.createBitmap(bmOverlay, 75, 0, 75, 75);
+        imgs[2] = Bitmap.createBitmap(bmOverlay, 150, 0, 75, 75);
+        imgs[3] = Bitmap.createBitmap(bmOverlay, 225, 0, 75, 75);
+        imgs[4] = Bitmap.createBitmap(bmOverlay, 0, 75, 75, 75);
+        imgs[5] = Bitmap.createBitmap(bmOverlay, 75, 75, 75, 75);
+        imgs[6] = Bitmap.createBitmap(bmOverlay, 150, 75, 75, 75);
+        imgs[7] = Bitmap.createBitmap(bmOverlay, 225, 75, 75, 75);
+        imgs[8] = Bitmap.createBitmap(bmOverlay, 0, 150, 75, 75);
+        imgs[9] = Bitmap.createBitmap(bmOverlay, 75, 150, 75, 75);
+        imgs[10] = Bitmap.createBitmap(bmOverlay, 150, 150, 75, 75);
+        imgs[11] = Bitmap.createBitmap(bmOverlay, 225, 150, 75, 75);
+        imgs[12] = Bitmap.createBitmap(bmOverlay, 0, 225, 75, 75);
+        imgs[13] = Bitmap.createBitmap(bmOverlay, 75, 225, 75, 75);
+        imgs[14] = Bitmap.createBitmap(bmOverlay, 150, 225, 75, 75);
+        imgs[15] = Bitmap.createBitmap(bmOverlay, 225, 225, 75, 75);
 
         refimgs = imgs.clone();
 
@@ -94,7 +101,7 @@ public class GameMedium extends AppCompatActivity {
                         if(position1ref == 1){
                             position2ref = 0;
                         }
-                        if(position1 != 10 && position2 != 10){
+                        if(position1 != 20 && position2 != 20){
                             Log.d("entered 2nd click", "swapped");
                             swap(position1, position2);
                         }
@@ -113,22 +120,22 @@ public class GameMedium extends AppCompatActivity {
         isCompleted();
         position1ref = 0;
         position2ref = 1;
-        position1 = 10;
-        position2 = 10;
+        position1 = 20;
+        position2 = 20;
         numberOfMoves++;
     }
 
     public void isCompleted(){
         int count = 0;
-        for(int i=0; i<9; i++){
+        for(int i=0; i<16; i++){
             if(imgs[i] == refimgs[i]){
                 count++;
             }
         }
 
-        if(count == 9){
+        if(count == 16){
             Intent scorepage = new Intent(this, score.class);
-            scorepage.putExtra("movescount", numberOfMoves);
+            scorepage.putExtra("mediumMovescount", numberOfMoves);
             startActivity(scorepage);
         }
 
