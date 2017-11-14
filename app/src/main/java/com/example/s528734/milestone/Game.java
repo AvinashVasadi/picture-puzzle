@@ -40,6 +40,7 @@ public class Game extends AppCompatActivity {
     int position1ref = 0;
     int position2ref = 1;
     int numberOfMoves = 0;
+    long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,8 @@ public class Game extends AppCompatActivity {
         refimgs = imgs.clone();
 
         Collections.shuffle((Arrays.asList(imgs)));
+
+        startTime = System.currentTimeMillis();
 
         final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this, imgs));
@@ -129,6 +132,9 @@ public class Game extends AppCompatActivity {
         if(count == 9){
             Intent scorepage = new Intent(this, score.class);
             scorepage.putExtra("movescount", numberOfMoves);
+            long difference = System.currentTimeMillis() - startTime;
+            Log.d("time taken", String.valueOf(difference));
+            System.out.println(difference);
             startActivity(scorepage);
         }
 
