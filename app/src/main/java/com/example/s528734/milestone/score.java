@@ -77,4 +77,17 @@ public class score extends AppCompatActivity {
         tvm.setText("210");
         tvh.setText("98");
     }
+
+    //score for normal mode
+
+    public void normalScore(View v)
+    {
+        TextView tve= (TextView) findViewById(R.id.textView8);
+        TextView tvm= (TextView) findViewById(R.id.textView9);
+        TextView tvh= (TextView) findViewById(R.id.textView10);
+        tve.setText("547");
+        tvm.setText("345");
+        tvh.setText("189");
+    }
+
 }
