@@ -4,9 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -67,5 +66,15 @@ public class score extends AppCompatActivity {
         }
 
         helper.close();
+    }
+
+    public void timeScore(View v)
+    {
+        TextView tve= (TextView) findViewById(R.id.textView8);
+        TextView tvm= (TextView) findViewById(R.id.textView9);
+        TextView tvh= (TextView) findViewById(R.id.textView10);
+        tve.setText("387");
+        tvm.setText("210");
+        tvh.setText("98");
     }
 }
