@@ -68,6 +68,7 @@ public class score extends AppCompatActivity {
         helper.close();
     }
 
+    //score for time mode
     public void timeScore(View v)
     {
         TextView tve= (TextView) findViewById(R.id.textView8);
