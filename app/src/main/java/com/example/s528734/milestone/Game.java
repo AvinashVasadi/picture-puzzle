@@ -141,8 +141,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void OnHomePage(View v){
-        Intent homepage = new Intent(this, MainActivity.class);
-        startActivity(homepage);
+        startActivity(new Intent(this,MainActivity.class));
     }
     public void undo(View v)
     {

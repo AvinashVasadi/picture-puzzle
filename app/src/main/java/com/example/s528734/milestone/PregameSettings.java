@@ -33,13 +33,11 @@ public class PregameSettings extends AppCompatActivity {
     }
 
     public void OnBack(View v){
-        Intent back = new Intent(this, MainActivity.class);
-        startActivity(back);
+        startActivity(new Intent(this,MainActivity.class));
     }
 
     public void OnLetsGo(View v){
-        Intent letsgo = new Intent(this, Game.class);
-        startActivity(letsgo);
+        startActivity(new Intent(this,Game.class));
     }
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -124,14 +122,16 @@ public class PregameSettings extends AppCompatActivity {
         modeFlag = 0;
         // Check which radio button was clicked
         switch(view.getId()) {
-            case R.id.TimeMode:
-                if (checked)
-                    modeFlag = 1;
-                    break;
+
             case R.id.NormalMode:
-                if (checked)
+                if (checked){
                     modeFlag = 1;
-                    break;
+                    break;}
+
+            case R.id.TimeMode:
+                if (checked){
+                    modeFlag = 1;
+                break;}
         }
     }
 

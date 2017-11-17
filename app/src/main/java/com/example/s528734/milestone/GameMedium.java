@@ -140,18 +140,20 @@ public class GameMedium extends AppCompatActivity {
         }
 
     }
-
-    public void OnHomePage(View v){
-        Intent homepage = new Intent(this, MainActivity.class);
-        startActivity(homepage);
-    }
-    public void undo(View v)
-    {
-        Toast.makeText(getApplicationContext(), "last action is undone", Toast.LENGTH_LONG).show();
-    }
     public void rotate(View v)
     {
-        Toast.makeText(getApplicationContext(), "the selected block is rotated", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Chosen block is rotated", Toast.LENGTH_LONG).show();
     }
+
+    public void undo(View v)
+    {
+        Toast.makeText(getApplicationContext(), "Previous action is reversed", Toast.LENGTH_LONG).show();
+    }
+
+    public void OnHomePage(View v){
+       startActivity(new Intent(this,MainActivity.class));
+    }
+
+
 
 }
