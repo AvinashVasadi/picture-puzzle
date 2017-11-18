@@ -9,10 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.IDataStore;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
+
+import java.util.List;
 
 public class score extends AppCompatActivity {
 
@@ -20,7 +25,7 @@ public class score extends AppCompatActivity {
     int mediumScore;
     int scoremode;
     long easytimecount;
-    long mediumtimecount;
+    long hardtimecount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +60,12 @@ public class score extends AppCompatActivity {
         }
         if(scoremode == 2){
             System.out.println("hardscore mode is called");
-            easytimecount = getIntent().getLongExtra("scorecount",5);
+            easytimecount = getIntent().getLongExtra("timecount",5);
+            hardtimecount = getIntent().getLongExtra("mediumtimecount", 5);
+
         }
 
-
-
-        messWithDB();
+        printOrderDetails();
     }
 
     public void ScoreBoardOnBack(View v){
@@ -72,17 +77,49 @@ public class score extends AppCompatActivity {
     {
         System.out.println("messwithDB is called");
         ScoreInfo score = new ScoreInfo();
-        score.easy = 1;
-        score.hard = 2;
-        score.easytime = 10;
-        score.hardtime = 20;
+
+        if(scoremode == 1){
+            if(easyScore>DBeasy){
+                score.setEasy(easyScore);
+            }
+            if(mediumScore>DBhard){
+                score.setHard(mediumScore);
+            }
+        }
+
+        if(scoremode == 2){
+            if(easytimecount>DBeasytime){
+                score.setEasytime(easytimecount);
+            }
+            if(hardtimecount>DBhardtime){
+                score.setHardtime(hardtimecount);
+            }
+        }
 
         Backendless.Data.of( ScoreInfo.class ).save(score, new AsyncCallback<ScoreInfo>() {
 
             @Override
-            public void handleResponse(ScoreInfo response) {
+            public void handleResponse(ScoreInfo response)
+            {
                 Log.d("DB","saved"+response);
+                response.setEasy(easyScore);
+                response.setEasytime(easytimecount);
+
+
+                Backendless.Data.of(ScoreInfo.class).save(response, new AsyncCallback<ScoreInfo>() {
+                    @Override
+                    public void handleResponse(ScoreInfo response) {
+
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+
+                    }
+                });
             }
+
+
 
             @Override
             public void handleFault(BackendlessFault fault) {
@@ -116,6 +153,44 @@ public class score extends AppCompatActivity {
 //
 //        helper.close();
     }
+
+    public int DBeasy;
+    public int DBhard;
+    public long DBeasytime;
+    public long DBhardtime;
+
+    public void printOrderDetails(){
+
+        IDataStore<ScoreInfo> orderStorage = Backendless.Data.of(ScoreInfo.class);
+        DataQueryBuilder query=DataQueryBuilder.create();
+        orderStorage.find(query, new AsyncCallback<List<ScoreInfo>>() {
+
+            @Override
+            public void handleResponse(List<ScoreInfo> response) {
+                Log.d("Printing : ","Order Details: "+response);
+                DBeasy = response.get(0).easy;
+                DBhard = response.get(0).hard;
+                DBeasytime = response.get(0).easytime;
+                DBhardtime = response.get(0).hardtime;
+
+
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Log.e( "MYAPP", "Server reported an error " + fault.getMessage() );
+            }
+        });
+        Toast.makeText(getApplicationContext(), "Printing Order Details", Toast.LENGTH_SHORT).show();
+        // helper.close();
+
+        messWithDB();
+
+    }
+
+
+
+
 
     //score for time mode
     public void timeScore(View v)
