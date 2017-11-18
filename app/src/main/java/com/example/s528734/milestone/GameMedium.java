@@ -40,6 +40,7 @@ public class GameMedium extends AppCompatActivity {
     int position1ref = 0;
     int position2ref = 1;
     int numberOfMoves = 0;
+    long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,8 @@ public class GameMedium extends AppCompatActivity {
         refimgs = imgs.clone();
 
         Collections.shuffle((Arrays.asList(imgs)));
+
+        startTime = System.currentTimeMillis();
 
         final GridView gridview = (GridView) findViewById(R.id.gridviewMedium);
         gridview.setAdapter(new ImageAdapter(this, imgs));
@@ -133,12 +136,28 @@ public class GameMedium extends AppCompatActivity {
             }
         }
 
-        if(count == 16){
-            Intent scorepage = new Intent(this, score.class);
-            scorepage.putExtra("mediumMovescount", numberOfMoves);
-            startActivity(scorepage);
-        }
+        int mode = getIntent().getIntExtra("timemode", 3);
 
+        if(count == 16) {
+            if (mode == 1) {
+                Intent scorepage = new Intent(this, score.class);
+                scorepage.putExtra("scoremode", mode);
+                scorepage.putExtra("mediummovescount", numberOfMoves);
+                startActivity(scorepage);
+            }
+            if (mode == 2) {
+                long difference = System.currentTimeMillis() - startTime;
+                //Log.d("time taken", String.valueOf(difference));
+                //System.out.println(difference);
+                Intent scorepage = new Intent(this, score.class);
+                scorepage.putExtra("scoremode", mode);
+                scorepage.putExtra("mediumtimecount", difference);
+                startActivity(scorepage);
+            }
+            if (mode == 3) {
+
+            }
+        }
     }
     public void rotate(View v)
     {

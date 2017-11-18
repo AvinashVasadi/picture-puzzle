@@ -95,8 +95,10 @@ public class PregameSettings extends AppCompatActivity {
             if(modeFlag == 0 || levelFlag == 0){
                 Toast.makeText(getApplicationContext(), "Select the both MODE & LEVEL of the game", Toast.LENGTH_LONG).show();
             } else if(easy == 1){
+                mIntent.putExtra("timemode", modeFlag);
                 startActivity(mIntent);
             } else if(medium == 1){
+                mIntent.putExtra("timemode", modeFlag);
                 startActivity(gameMedium);
             } else if(hard == 1){
                 startActivity(gameHard);
@@ -130,7 +132,7 @@ public class PregameSettings extends AppCompatActivity {
 
             case R.id.TimeMode:
                 if (checked){
-                    modeFlag = 1;
+                    modeFlag = 2;
                 break;}
         }
     }
@@ -151,15 +153,10 @@ public class PregameSettings extends AppCompatActivity {
                     levelFlag = 1;
                     easy = 1;
                 break;
-            case R.id.Medium:
-                if (checked)
-                    levelFlag = 1;
-                    medium = 1;
-                break;
             case R.id.Hard:
                 if (checked)
                     levelFlag = 1;
-                    hard = 1;
+                    medium = 1;
                 break;
         }
     }

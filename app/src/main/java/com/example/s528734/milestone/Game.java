@@ -129,13 +129,28 @@ public class Game extends AppCompatActivity {
             }
         }
 
+        int mode = getIntent().getIntExtra("timemode", 3);
+
         if(count == 9){
-            Intent scorepage = new Intent(this, score.class);
-            scorepage.putExtra("movescount", numberOfMoves);
-            long difference = System.currentTimeMillis() - startTime;
-            Log.d("time taken", String.valueOf(difference));
-            System.out.println(difference);
-            startActivity(scorepage);
+            if(mode == 1){
+                Intent scorepage = new Intent(this, score.class);
+                scorepage.putExtra("scoremode", mode);
+                scorepage.putExtra("movescount", numberOfMoves);
+                startActivity(scorepage);
+            }
+            if(mode == 2){
+                long difference = System.currentTimeMillis() - startTime;
+                //Log.d("time taken", String.valueOf(difference));
+                //System.out.println(difference);
+                Intent scorepage = new Intent(this, score.class);
+                scorepage.putExtra("scoremode", mode);
+                scorepage.putExtra("timecount", difference);
+                startActivity(scorepage);
+            }
+            if(mode == 3){
+
+            }
+
         }
 
     }
