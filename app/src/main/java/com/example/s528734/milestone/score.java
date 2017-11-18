@@ -21,11 +21,11 @@ import java.util.List;
 
 public class score extends AppCompatActivity {
 
-    int easyScore;
-    int mediumScore;
+    int easyScore = 0;
+    int mediumScore = 0;
     int scoremode;
-    long easytimecount;
-    long hardtimecount;
+    long easytimecount = 0;
+    long hardtimecount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,8 @@ public class score extends AppCompatActivity {
             } else {
                 easyScore = 1000/movescount;
             }
-            TextView easyscoreTV = (TextView)findViewById(R.id.textView8);
-            easyscoreTV.setText(String.valueOf(easyScore));
+//            TextView easyscoreTV = (TextView)findViewById(R.id.textView8);
+//            easyscoreTV.setText(String.valueOf(easyScore));
 
             int mediumMovesCount = getIntent().getIntExtra("mediumMovesCount", 1);
             if(mediumMovesCount == 1){
@@ -55,13 +55,21 @@ public class score extends AppCompatActivity {
                 mediumScore = 4000/mediumMovesCount;
             }
 
-            TextView mediumscoreTV = (TextView)findViewById(R.id.textView9);
-            mediumscoreTV.setText(String.valueOf(mediumScore));
+//            TextView mediumscoreTV = (TextView)findViewById(R.id.textView10);
+//            mediumscoreTV.setText(String.valueOf(mediumScore));
         }
         if(scoremode == 2){
             System.out.println("hardscore mode is called");
+
             easytimecount = getIntent().getLongExtra("timecount",5);
+//            TextView tve= (TextView) findViewById(R.id.textView8);
+//            tve.setText(Long.toString(easytimecount));
+
+
             hardtimecount = getIntent().getLongExtra("mediumtimecount", 5);
+//            TextView tvh= (TextView) findViewById(R.id.textView10);
+//            tvh.setText(Long.toString(hardtimecount));
+
 
         }
 
@@ -196,11 +204,9 @@ public class score extends AppCompatActivity {
     public void timeScore(View v)
     {
         TextView tve= (TextView) findViewById(R.id.textView8);
-        TextView tvm= (TextView) findViewById(R.id.textView9);
         TextView tvh= (TextView) findViewById(R.id.textView10);
-        tve.setText("387");
-        tvm.setText("210");
-        tvh.setText("98");
+        tve.setText(Long.toString(easytimecount));
+        tvh.setText(Long.toString(hardtimecount));
     }
 
     //score for normal mode
@@ -208,11 +214,9 @@ public class score extends AppCompatActivity {
     public void normalScore(View v)
     {
         TextView tve= (TextView) findViewById(R.id.textView8);
-        TextView tvm= (TextView) findViewById(R.id.textView9);
         TextView tvh= (TextView) findViewById(R.id.textView10);
-        tve.setText("547");
-        tvm.setText("345");
-        tvh.setText("189");
+        tve.setText(Integer.toString(easyScore));
+        tvh.setText(Integer.toString(mediumScore));
     }
 
 }
