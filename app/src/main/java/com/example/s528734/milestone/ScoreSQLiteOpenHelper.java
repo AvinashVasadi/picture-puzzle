@@ -19,8 +19,9 @@ public class ScoreSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String createDB = "create table scores(" + "_id integer primary key autoincrement," +
             "easy integer," +
-            "medium integer," +
-            "hard integer)";
+            "hard integer," +
+            "easytime integer," +
+            "hardtime integer)";
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
