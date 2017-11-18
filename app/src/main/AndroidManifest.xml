@@ -22,7 +22,8 @@
         <activity android:name=".score" />
         <activity android:name=".LeaderBoard" />
         <activity android:name=".GameMedium" />
-        <activity android:name=".GameHard"></activity>
+        <activity android:name=".GameHard" />
+        <activity android:name=".ScoreView"></activity>
     </application>
 
 </manifest>
