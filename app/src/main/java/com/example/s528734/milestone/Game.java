@@ -52,59 +52,69 @@ public class Game extends AppCompatActivity {
 
       Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
 
-        int xcordinateindex = (bmp.getWidth()-300)/2;
-        int ycordinateindex = (bmp.getHeight()-300)/2;
+      int length = bmp.getWidth();
+      int width = bmp.getHeight();
 
-        Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordinateindex,ycordinateindex, 300, 300);
+      if(length>300 && width>300){
+          int xcordinateindex = (bmp.getWidth()-300)/2;
+          int ycordinateindex = (bmp.getHeight()-300)/2;
 
-        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
-        imgs[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
-        imgs[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
-        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
-        imgs[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
-        imgs[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
-        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
-        imgs[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
-        imgs[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
+          Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordinateindex,ycordinateindex, 300, 300);
 
-        refimgs = imgs.clone();
+          imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
+          imgs[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
+          imgs[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
+          imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
+          imgs[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
+          imgs[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
+          imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
+          imgs[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
+          imgs[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
 
-        Collections.shuffle((Arrays.asList(imgs)));
+          refimgs = imgs.clone();
 
-        startTime = System.currentTimeMillis();
+          Collections.shuffle((Arrays.asList(imgs)));
 
-        final GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this, imgs));
+          startTime = System.currentTimeMillis();
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
-                ImageView tile1 = (ImageView) gridview.getChildAt(position);
-                ImageView capture1 = (ImageView) tile1;
-                capture1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), "Accessed Tile : "+position, Toast.LENGTH_LONG).show();
-                        if(position1ref == 0){
-                            Log.d("entered 1st click", "Click1");
-                            position1 = position;
-                            position1ref = 1;
-                        }
-                        if(position2ref == 0){
-                            Log.d("entered 2nd click", "Click2");
-                            position2 = position;
-                        }
-                        if(position1ref == 1){
-                            position2ref = 0;
-                        }
-                        if(position1 != 10 && position2 != 10){
-                            Log.d("entered 2nd click", "swapped");
-                            swap(position1, position2);
-                        }
-                    }
-                });
-            }
-        });
+          final GridView gridview = (GridView) findViewById(R.id.gridview);
+          gridview.setAdapter(new ImageAdapter(this, imgs));
+
+          gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
+                  ImageView tile1 = (ImageView) gridview.getChildAt(position);
+                  ImageView capture1 = (ImageView) tile1;
+                  capture1.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          Toast.makeText(getApplicationContext(), "Accessed Tile : "+position, Toast.LENGTH_LONG).show();
+                          if(position1ref == 0){
+                              Log.d("entered 1st click", "Click1");
+                              position1 = position;
+                              position1ref = 1;
+                          }
+                          if(position2ref == 0){
+                              Log.d("entered 2nd click", "Click2");
+                              position2 = position;
+                          }
+                          if(position1ref == 1){
+                              position2ref = 0;
+                          }
+                          if(position1 != 10 && position2 != 10){
+                              Log.d("entered 2nd click", "swapped");
+                              swap(position1, position2);
+                          }
+                      }
+                  });
+              }
+          });
+      } else {
+          final GridView gridview = (GridView) findViewById(R.id.gridview);
+//          gridview.setAdapter(new ImageAdapter(this, imgs));
+      }
+
+
     }
 
     public void swap(int index1, int index2){
