@@ -14,9 +14,11 @@ public class LeaderBoard extends AppCompatActivity {
         setContentView(R.layout.activity_leader_board);
     }
     public void LeaderBoardOnBack(View v){
-        Intent bcak = new Intent(this, MainActivity.class);
-        startActivity(bcak);
+
+        startActivity(new Intent(this,MainActivity.class));
     }
+
+
 
     //score for time mode
     public void timeScorel(View v)

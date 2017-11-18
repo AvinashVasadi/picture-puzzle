@@ -14,22 +14,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStart(View v){
-        Intent start = new Intent(this, PregameSettings.class);
-        startActivity(start);
+       startActivity(new Intent(this,PregameSettings.class));
     }
 
     public void OnSettings(View v){
-        Intent settings = new Intent(this, Settings.class);
-        startActivity(settings);
+       startActivity(new Intent(this,Settings.class));
     }
 
     public void OnHighScore(View v){
-        Intent highscore = new Intent(this, score.class);
-        startActivity(highscore);
+        startActivity(new Intent(this,score.class));
     }
 
     public void OnLeaderBoard(View v){
-        Intent leaderboard = new Intent(this, LeaderBoard.class);
-        startActivity(leaderboard);
+        startActivity(new Intent(this,LeaderBoard.class));
     }
 }

@@ -1,44 +1,28 @@
 package com.example.s528734.milestone;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class GameHard extends AppCompatActivity {
 
-    Bitmap[] imgs = new Bitmap[9];
+    Bitmap[] img = new Bitmap[9];
     Bitmap[] refimgs = new Bitmap[9];
-    int position1 = 10;
-    int position2 = 10;
-    int position1ref = 0;
-    int position2ref = 1;
+    int pos1 = 10;
+    int pos2 = 10;
+    int pos1ref = 0;
+    int pos2ref = 1;
     int numberOfMoves = 0;
 
     @Override
@@ -51,27 +35,27 @@ public class GameHard extends AppCompatActivity {
 
         Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
 
-        int xcordinateindex = (bmp.getWidth()-300)/2;
-        int ycordinateindex = (bmp.getHeight()-300)/2;
+        int xcordindex = (bmp.getWidth()-300)/2;
+        int ycordindex = (bmp.getHeight()-300)/2;
 
-        Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordinateindex,ycordinateindex, 300, 300);
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp, xcordindex,ycordindex, 300, 300);
 
-        imgs[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
-        imgs[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
-        imgs[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
-        imgs[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
-        imgs[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
-        imgs[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
-        imgs[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
-        imgs[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
-        imgs[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
+        img[0] = Bitmap.createBitmap(bmOverlay, 0, 0, 100,  100);
+        img[1] = Bitmap.createBitmap(bmOverlay, 100, 0, 100, 100);
+        img[2] = Bitmap.createBitmap(bmOverlay, 200, 0, 100, 100);
+        img[3] = Bitmap.createBitmap(bmOverlay, 0, 100, 100, 100);
+        img[4] = Bitmap.createBitmap(bmOverlay, 100, 100, 100, 100);
+        img[5] = Bitmap.createBitmap(bmOverlay, 200, 100, 100, 100);
+        img[6] = Bitmap.createBitmap(bmOverlay, 0, 200, 100, 100);
+        img[7] = Bitmap.createBitmap(bmOverlay, 100, 200, 100, 100);
+        img[8] = Bitmap.createBitmap(bmOverlay, 200, 200, 100, 100);
 
-        refimgs = imgs.clone();
+        refimgs = img.clone();
 
-        Collections.shuffle((Arrays.asList(imgs)));
+        Collections.shuffle((Arrays.asList(img)));
 
         final GridView gridview = (GridView) findViewById(R.id.gridviewHard);
-        gridview.setAdapter(new ImageAdapter(this, imgs));
+        gridview.setAdapter(new ImageAdapter(this, img));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,21 +66,21 @@ public class GameHard extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(), "Accessed Tile : "+position, Toast.LENGTH_LONG).show();
-                        if(position1ref == 0){
+                        if(pos1ref == 0){
                             Log.d("entered 1st click", "Click1");
-                            position1 = position;
-                            position1ref = 1;
+                            pos1 = position;
+                            pos1ref = 1;
                         }
-                        if(position2ref == 0){
+                        if(pos2ref == 0){
                             Log.d("entered 2nd click", "Click2");
-                            position2 = position;
+                            pos2 = position;
                         }
-                        if(position1ref == 1){
-                            position2ref = 0;
+                        if(pos1ref == 1){
+                            pos2ref = 0;
                         }
-                        if(position1 != 10 && position2 != 10){
+                        if(pos1 != 10 && pos2 != 10){
                             Log.d("entered 2nd click", "swapped");
-                            swap(position1, position2);
+                            swap(pos1, pos2);
                         }
                     }
                 });
@@ -105,23 +89,23 @@ public class GameHard extends AppCompatActivity {
     }
 
     public void swap(int index1, int index2){
-        Bitmap temp = imgs[index1];
-        imgs[index1] = imgs[index2];
-        imgs[index2] = temp;
+        Bitmap temp = img[index1];
+        img[index1] = img[index2];
+        img[index2] = temp;
         final GridView gridview = (GridView) findViewById(R.id.gridviewHard);
-        gridview.setAdapter(new ImageAdapter(this, imgs));
+        gridview.setAdapter(new ImageAdapter(this, img));
         isCompleted();
-        position1ref = 0;
-        position2ref = 1;
-        position1 = 10;
-        position2 = 10;
+        pos1ref = 0;
+        pos2ref = 1;
+        pos1 = 10;
+        pos2 = 10;
         numberOfMoves++;
     }
 
     public void isCompleted(){
         int count = 0;
         for(int i=0; i<9; i++){
-            if(imgs[i] == refimgs[i]){
+            if(img[i] == refimgs[i]){
                 count++;
             }
         }
@@ -135,8 +119,7 @@ public class GameHard extends AppCompatActivity {
     }
 
     public void OnHomePage(View v){
-        Intent homepage = new Intent(this, MainActivity.class);
-        startActivity(homepage);
+        startActivity(new Intent(this,MainActivity.class));
     }
     public void undo(View v)
     {
