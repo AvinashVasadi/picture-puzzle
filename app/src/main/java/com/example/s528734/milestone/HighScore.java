@@ -26,6 +26,7 @@ public class HighScore extends AppCompatActivity {
 
     private void messWithDB()
     {
+        System.out.println("messwithDB is called");
         SQLitedatbase helper = new SQLitedatbase(getApplicationContext());
         SQLiteDatabase TestDB = helper.getWritableDatabase();
         ContentValues movie = new ContentValues();
@@ -33,6 +34,7 @@ public class HighScore extends AppCompatActivity {
         Cursor results = TestDB.query("test", new String[]{"_id", "easy", "hard", "easytime", "hardtime"}, null, null, null, null, null);
         for(int i = 0; i<results.getCount(); i++)
         {
+            System.out.println("entered for loop");
             results.moveToPosition(i);
             DBeasy = results.getInt(1);
             DBhard = results.getInt(2);
