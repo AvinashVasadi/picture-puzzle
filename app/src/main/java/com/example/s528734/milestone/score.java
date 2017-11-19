@@ -45,8 +45,9 @@ public class score extends AppCompatActivity {
             } else {
                 easyScore = 1000/movescount;
             }
-//            TextView easyscoreTV = (TextView)findViewById(R.id.textView8);
-//            easyscoreTV.setText(String.valueOf(easyScore));
+
+            TextView easyscoreTV = (TextView)findViewById(R.id.textView8);
+            easyscoreTV.setText(String.valueOf(easyScore));
 
             int mediumMovesCount = getIntent().getIntExtra("mediumMovesCount", 1);
             if(mediumMovesCount == 1){
@@ -55,20 +56,20 @@ public class score extends AppCompatActivity {
                 mediumScore = 4000/mediumMovesCount;
             }
 
-//            TextView mediumscoreTV = (TextView)findViewById(R.id.textView10);
-//            mediumscoreTV.setText(String.valueOf(mediumScore));
+            TextView mediumscoreTV = (TextView)findViewById(R.id.textView10);
+            mediumscoreTV.setText(String.valueOf(mediumScore));
         }
         if(scoremode == 2){
             System.out.println("hardscore mode is called");
 
             easytimecount = getIntent().getLongExtra("timecount",5);
-//            TextView tve= (TextView) findViewById(R.id.textView8);
-//            tve.setText(Long.toString(easytimecount));
+            TextView tve= (TextView) findViewById(R.id.textView8);
+            tve.setText(Long.toString(easytimecount));
 
 
             hardtimecount = getIntent().getLongExtra("mediumtimecount", 5);
-//            TextView tvh= (TextView) findViewById(R.id.textView10);
-//            tvh.setText(Long.toString(hardtimecount));
+            TextView tvh= (TextView) findViewById(R.id.textView10);
+            tvh.setText(Long.toString(hardtimecount));
 
 
         }
@@ -180,8 +181,6 @@ public class score extends AppCompatActivity {
                 DBhard = response.get(0).hard;
                 DBeasytime = response.get(0).easytime;
                 DBhardtime = response.get(0).hardtime;
-
-
             }
 
             @Override
@@ -189,7 +188,7 @@ public class score extends AppCompatActivity {
                 Log.e( "MYAPP", "Server reported an error " + fault.getMessage() );
             }
         });
-        Toast.makeText(getApplicationContext(), "Printing Order Details", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Printing Order Details", Toast.LENGTH_SHORT).show();
         // helper.close();
 
         messWithDB();
