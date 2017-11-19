@@ -130,7 +130,7 @@ public class GameMedium extends AppCompatActivity {
             errimg[13] = Bitmap.createBitmap(errorimg, 75, 225, 75, 75);
             errimg[14] = Bitmap.createBitmap(errorimg, 150, 225, 75, 75);
             errimg[15] = Bitmap.createBitmap(errorimg, 225, 225, 75, 75);
-            final GridView gridview = (GridView) findViewById(R.id.gridview);
+            final GridView gridview = (GridView) findViewById(R.id.gridviewMedium);
             gridview.setAdapter(new ImageAdapter(this, errimg));
 
         }
