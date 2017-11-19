@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Android\Apps\picture-puzzle\MileStone.iml" filepath="C:\Android\Apps\picture-puzzle\MileStone.iml" />
+      <module fileurl="file://C:/Android/Apps/picture-puzzle/MileStone.iml" filepath="C:/Android/Apps/picture-puzzle/MileStone.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/picture-puzzle.iml" filepath="$PROJECT_DIR$/picture-puzzle.iml" />
       <module fileurl="file://$PROJECT_DIR$/picture-puzzle.iml" filepath="$PROJECT_DIR$/picture-puzzle.iml" />
     </modules>
   </component>
