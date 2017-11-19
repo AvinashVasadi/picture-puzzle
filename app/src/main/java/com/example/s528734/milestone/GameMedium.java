@@ -21,7 +21,7 @@ import java.util.Collections;
 public class GameMedium extends AppCompatActivity {
 
     Bitmap[] imgs = new Bitmap[16];
-    Bitmap[] errimg = new Bitmap[9];
+    Bitmap[] errimg = new Bitmap[16];
     Bitmap[] refimgs = new Bitmap[16];
     int position1 = 20;
     int position2 = 20;
