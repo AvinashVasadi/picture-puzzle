@@ -132,6 +132,7 @@ public class GameMedium extends AppCompatActivity {
             errimg[15] = Bitmap.createBitmap(errorimg, 225, 225, 75, 75);
             final GridView gridview = (GridView) findViewById(R.id.gridviewMedium);
             gridview.setAdapter(new ImageAdapter(this, errimg));
+            Toast.makeText(getApplicationContext(), "IMAGE SIZE ERROR, SIZE SHOULD BE GREATER THAN 300X300", Toast.LENGTH_LONG).show();
 
         }
 
