@@ -1,6 +1,7 @@
 package com.example.s528734.milestone;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,9 +11,11 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.support.v4.graphics.BitmapCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +37,7 @@ import java.util.Collections;
 public class Game extends AppCompatActivity {
 
     Bitmap[] imgs = new Bitmap[9];
+    Bitmap[] errimg = new Bitmap[9];
     Bitmap[] refimgs = new Bitmap[9];
     int position1 = 10;
     int position2 = 10;
@@ -110,8 +114,26 @@ public class Game extends AppCompatActivity {
               }
           });
       } else {
+          Resources resources = getResources();
+          Drawable d = resources.getDrawable(R.drawable.error);
+          Bitmap errorimgy = ((BitmapDrawable) d).getBitmap();
+
+          int xcordinateindexy = (errorimgy.getWidth()-300)/2;
+          int ycordinateindexy = (errorimgy.getHeight()-300)/2;
+
+          Bitmap errorimg = Bitmap.createBitmap(errorimgy, xcordinateindexy,ycordinateindexy, 300, 300);
+          errimg[0] = Bitmap.createBitmap(errorimg, 0, 0, 100,  100);
+          errimg[1] = Bitmap.createBitmap(errorimg, 100, 0, 100, 100);
+          errimg[2] = Bitmap.createBitmap(errorimg, 200, 0, 100, 100);
+          errimg[3] = Bitmap.createBitmap(errorimg, 0, 100, 100, 100);
+          errimg[4] = Bitmap.createBitmap(errorimg, 100, 100, 100, 100);
+          errimg[5] = Bitmap.createBitmap(errorimg, 200, 100, 100, 100);
+          errimg[6] = Bitmap.createBitmap(errorimg, 0, 200, 100, 100);
+          errimg[7] = Bitmap.createBitmap(errorimg, 100, 200, 100, 100);
+          errimg[8] = Bitmap.createBitmap(errorimg, 200, 200, 100, 100);
           final GridView gridview = (GridView) findViewById(R.id.gridview);
-//          gridview.setAdapter(new ImageAdapter(this, imgs));
+          gridview.setAdapter(new ImageAdapter(this, errimg));
+
       }
 
 
