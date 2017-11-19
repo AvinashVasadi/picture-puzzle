@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.s528734.milestone">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -24,7 +25,8 @@
         <activity android:name=".LeaderBoard" />
         <activity android:name=".GameMedium" />
         <activity android:name=".GameHard" />
-        <activity android:name=".ScoreView"></activity>
+        <activity android:name=".ScoreView" />
+        <activity android:name=".HighScore"></activity>
     </application>
 
 </manifest>

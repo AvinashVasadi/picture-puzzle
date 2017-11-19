@@ -26,6 +26,7 @@ public class score extends AppCompatActivity {
     int scoremode;
     long easytimecount = 0;
     long hardtimecount = 0;
+    int DBflag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +63,19 @@ public class score extends AppCompatActivity {
         if(scoremode == 2){
             System.out.println("hardscore mode is called");
 
-            easytimecount = getIntent().getLongExtra("timecount",5);
+            easytimecount = getIntent().getLongExtra("timecount",0);
             TextView tve= (TextView) findViewById(R.id.textView8);
-            tve.setText(Long.toString(easytimecount));
+            tve.setText("0");
 
 
-            hardtimecount = getIntent().getLongExtra("mediumtimecount", 5);
+            hardtimecount = getIntent().getLongExtra("mediumtimecount", 0);
             TextView tvh= (TextView) findViewById(R.id.textView10);
-            tvh.setText(Long.toString(hardtimecount));
+            tvh.setText("0");
 
 
         }
-
-        printOrderDetails();
+        messWithDB();
+        //printOrderDetails();
     }
 
     public void ScoreBoardOnBack(View v){
@@ -84,83 +85,122 @@ public class score extends AppCompatActivity {
 
     private void messWithDB()
     {
-        System.out.println("messwithDB is called");
-        ScoreInfo score = new ScoreInfo();
+//        System.out.println("messwithDB is called");
+//        ScoreInfo score = new ScoreInfo();
+//
+//        if(scoremode == 1){
+//            if(easyScore>DBeasy){
+//                score.setEasy(easyScore);
+//            }
+//            if(mediumScore>DBhard){
+//                score.setHard(mediumScore);
+//            }
+//        }
+//
+//        if(scoremode == 2){
+//            if(easytimecount>DBeasytime){
+//                score.setEasytime(easytimecount);
+//            }
+//            if(hardtimecount>DBhardtime){
+//                score.setHardtime(hardtimecount);
+//            }
+//        }
+//
+//        Backendless.Data.of( ScoreInfo.class ).save(score, new AsyncCallback<ScoreInfo>() {
+//
+//            @Override
+//            public void handleResponse(ScoreInfo response)
+//            {
+//                Log.d("DB","saved"+response);
+//                response.setEasy(easyScore);
+//                response.setEasytime(easytimecount);
+//
+//
+//                Backendless.Data.of(ScoreInfo.class).save(response, new AsyncCallback<ScoreInfo>() {
+//                    @Override
+//                    public void handleResponse(ScoreInfo response) {
+//
+//                    }
+//
+//                    @Override
+//                    public void handleFault(BackendlessFault fault) {
+//
+//                    }
+//                });
+//            }
+//
+//
+//
+//            @Override
+//            public void handleFault(BackendlessFault fault) {
+//                Log.e( "MYAPP", "Server reported an error " + fault.getMessage() );
+//            }
+//        });
+
+        //trial2
+        SQLitedatbase helper = new SQLitedatbase(getApplicationContext());
+        SQLiteDatabase TestDB = helper.getWritableDatabase();
+        ContentValues movie = new ContentValues();
+
+        Cursor results = TestDB.query("test", new String[]{"_id", "easy", "hard", "easytime", "hardtime"}, null, null, null, null, null);
+        for(int i = 0; i<results.getCount(); i++)
+        {
+            results.moveToPosition(i);
+            DBeasy = results.getInt(1);
+            DBhard = results.getInt(2);
+            DBeasytime = results.getInt(3);
+            DBhardtime = results.getInt(4);
+            System.out.println(results.getInt(0) + " " + results.getInt(1) + " " + results.getInt(2) + results.getInt(3));
+        }
 
         if(scoremode == 1){
             if(easyScore>DBeasy){
-                score.setEasy(easyScore);
+                movie.put("easy", easyScore);
+                DBflag = 1;
             }
             if(mediumScore>DBhard){
-                score.setHard(mediumScore);
+                movie.put("hard", mediumScore);
+                DBflag = 1;
             }
         }
 
         if(scoremode == 2){
             if(easytimecount>DBeasytime){
-                score.setEasytime(easytimecount);
+                movie.put("easytime", easytimecount);
+                DBflag = 1;
             }
             if(hardtimecount>DBhardtime){
-                score.setHardtime(hardtimecount);
+                movie.put("hardtime", hardtimecount);
+                DBflag = 1;
             }
         }
 
-        Backendless.Data.of( ScoreInfo.class ).save(score, new AsyncCallback<ScoreInfo>() {
+        if(DBflag == 0)
+        {
+        Cursor updatedresults = TestDB.query("test", new String[]{"_id", "easy", "hard", "easytime", "hardtime"}, null, null, null, null, null);
+        for(int i = 0; i<results.getCount(); i++)
+        {
+            updatedresults.moveToPosition(i);
+            DBeasy = updatedresults.getInt(1);
+            DBhard = updatedresults.getInt(2);
+            DBeasytime = updatedresults.getInt(3);
+            DBhardtime = updatedresults.getInt(4);
 
-            @Override
-            public void handleResponse(ScoreInfo response)
-            {
-                Log.d("DB","saved"+response);
-                response.setEasy(easyScore);
-                response.setEasytime(easytimecount);
+            movie.put("easy", DBeasy);
+            movie.put("hard", DBhard);
+            movie.put("easytime", DBeasytime);
+            movie.put("hardtime", DBhardtime);
 
+            TestDB.update("test", movie, null, null);
+            System.out.println(updatedresults.getInt(0) + " " + updatedresults.getInt(1) + " " + updatedresults.getInt(2) + updatedresults.getInt(3));
+        }
 
-                Backendless.Data.of(ScoreInfo.class).save(response, new AsyncCallback<ScoreInfo>() {
-                    @Override
-                    public void handleResponse(ScoreInfo response) {
+        } else {
+            TestDB.update("test", movie, null, null);
+            DBflag = 0;
+        }
 
-                    }
-
-                    @Override
-                    public void handleFault(BackendlessFault fault) {
-
-                    }
-                });
-            }
-
-
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Log.e( "MYAPP", "Server reported an error " + fault.getMessage() );
-            }
-        });
-
-//        ScoreSQLiteOpenHelper helper = new ScoreSQLiteOpenHelper(getApplicationContext());
-//        SQLiteDatabase scoreDB = helper.getWritableDatabase();
-//        ContentValues score = new ContentValues();
-//
-//        if(scoremode == 1){
-//            score.put("easy", easyScore);
-//            score.put("hard", mediumScore);
-//            score.put("easytime", 107);
-//            score.put("hardtime", 108);
-//        }
-//        if(scoremode == 2){
-//            score.put("easytime", easytimecount);
-//            score.put("hardtime", 108);
-//        }
-//
-//        scoreDB.insert("scores",null, score);
-//
-//        Cursor results = scoreDB.query("scores", new String[]{"_id", "easy", "hard", "easytime", "hardtime"}, "", null, null, null, null);
-//        for(int i = 0; i<results.getCount(); i++)
-//        {
-//            results.moveToPosition(i);
-//            System.out.println(results.getString(1) + " " + results.getInt(2));
-//        }
-//
-//        helper.close();
+        helper.close();
     }
 
     public int DBeasy;
@@ -188,16 +228,10 @@ public class score extends AppCompatActivity {
                 Log.e( "MYAPP", "Server reported an error " + fault.getMessage() );
             }
         });
-        //Toast.makeText(getApplicationContext(), "Printing Order Details", Toast.LENGTH_SHORT).show();
-        // helper.close();
 
         messWithDB();
 
     }
-
-
-
-
 
     //score for time mode
     public void timeScore(View v)

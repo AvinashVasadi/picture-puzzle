@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnHighScore(View v){
-        startActivity(new Intent(this,score.class));
+        startActivity(new Intent(this,HighScore.class));
     }
 
     public void OnLeaderBoard(View v){
